@@ -7,22 +7,28 @@ def inicio(request):
     return render(request, "appcoder/index.html")
 
 def cursos(request):
-    # Obtenes el listado de objetos en la BD
-    cursos = Curso.objects.all()
-
-    for curso in cursos:
-        print(curso.nombre)
-
     return render(request, "appcoder/cursos.html")
     
 def estudiantes(request):
     return render(request, "appcoder/estudiantes.html")
-
+    
 def profesores(request):
     return render(request, "appcoder/profesores.html")
 
 def entregables(request):
     return render(request, "appcoder/entregables.html")
+
+def creacion_curso(request):
+    if request.method == "POST":
+        nombre_curso = request.POST["curso"]
+        numero_camada = int(request.POST["camada"])
+        
+        curso = Curso(nombre=nombre_curso, camada=numero_camada)
+        curso.save()
+        
+    return render(request, "appcoder/formularios_curso.html")
+
+
 
 
 # def listado_cursos(request):
